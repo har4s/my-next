@@ -1,0 +1,214 @@
+@use 'sass:map';
+@use 'sass:string';
+@use 'sass:list';
+@use 'sass:math';
+@use 'variables' as *;
+@use 'helpers' as *;
+
+:root {
+  /* breakpoints */
+  $responsive-breakpoints: map.get($breakpoints, '@all');
+  $fluid-responsive-breakpoints: map.get($breakpoints, 'fluid');
+  @if $responsive-breakpoints {
+    @each $name, $value in $responsive-breakpoints {
+      --space-#{$name}: #{$value};
+    }
+  } @else if $fluid-responsive-breakpoints {
+    $list-breakpoints: ();
+    $list-values: ();
+    @each $breakpoint, $value in $fluid-responsive-breakpoints {
+      $breakpoint-value: map.get(
+        $breakpoints,
+        string.slice($breakpoint, 2, -1)
+      );
+      $list-breakpoints: list.append($list-breakpoints, $breakpoint-value);
+      $list-values: list.append($list-values, $value);
+    }
+    $breakpoint-small: to-number(list.nth($list-breakpoints, 1));
+    $breakpoint-large: to-number(list.nth($list-breakpoints, 2));
+    @each $name, $value in list.nth($list-values, 1) {
+      $value-small: to-number($value);
+      $value-large: map.get(list.nth($list-values, 2), $name);
+      $value-large: to-number($value-large);
+      $y-int: math.div(
+        $value-large - $value-small,
+        $breakpoint-large - $breakpoint-small
+      );
+      $y: $y-int * 100vw;
+      $x: $value-small - $y-int * $breakpoint-small;
+      --screen-#{$name}: clamp(
+        #{$value-small},
+        calc(#{$x} + #{$y}),
+        #{$value-large}
+      );
+    }
+  } @else {
+    @each $name, $value in $breakpoints {
+      --screen-#{$name}: #{$value};
+    }
+  }
+
+  /* sizing */
+  $responsive-sizes: map.get($sizes, '@all');
+  $fluid-responsive-sizes: map.get($sizes, 'fluid');
+  @if $responsive-sizes {
+    @each $name, $value in $responsive-sizes {
+      --space-#{$name}: #{$value};
+    }
+  } @else if $fluid-responsive-sizes {
+    $list-breakpoints: ();
+    $list-values: ();
+    @each $breakpoint, $value in $fluid-responsive-sizes {
+      $breakpoint-value: map.get(
+        $breakpoints,
+        string.slice($breakpoint, 2, -1)
+      );
+      $list-breakpoints: list.append($list-breakpoints, $breakpoint-value);
+      $list-values: list.append($list-values, $value);
+    }
+    $breakpoint-small: to-number(list.nth($list-breakpoints, 1));
+    $breakpoint-large: to-number(list.nth($list-breakpoints, 2));
+    @each $name, $value in list.nth($list-values, 1) {
+      $value-small: to-number($value);
+      $value-large: map.get(list.nth($list-values, 2), $name);
+      $value-large: to-number($value-large);
+      $y-int: math.div(
+        $value-large - $value-small,
+        $breakpoint-large - $breakpoint-small
+      );
+      $y: $y-int * 100vw;
+      $x: $value-small - $y-int * $breakpoint-small;
+      --size-#{$name}: clamp(
+        #{$value-small},
+        calc(#{$x} + #{$y}),
+        #{$value-large}
+      );
+    }
+  } @else {
+    @each $name, $value in $sizes {
+      --size-#{$name}: #{$value};
+    }
+  }
+
+  /* spacing */
+  $responsive-spacing: map.get($spacing, '@all');
+  $fluid-responsive-spacing: map.get($spacing, 'fluid');
+  @if $responsive-spacing {
+    @each $name, $value in $responsive-spacing {
+      --space-#{$name}: #{$value};
+    }
+  } @else if $fluid-responsive-spacing {
+    $list-breakpoints: ();
+    $list-values: ();
+    @each $breakpoint, $value in $fluid-responsive-spacing {
+      $breakpoint-value: map.get(
+        $breakpoints,
+        string.slice($breakpoint, 2, -1)
+      );
+      $list-breakpoints: list.append($list-breakpoints, $breakpoint-value);
+      $list-values: list.append($list-values, $value);
+    }
+    $breakpoint-small: to-number(list.nth($list-breakpoints, 1));
+    $breakpoint-large: to-number(list.nth($list-breakpoints, 2));
+    @each $name, $value in list.nth($list-values, 1) {
+      $value-small: to-number($value);
+      $value-large: map.get(list.nth($list-values, 2), $name);
+      $value-large: to-number($value-large);
+      $y-int: math.div(
+        $value-large - $value-small,
+        $breakpoint-large - $breakpoint-small
+      );
+      $y: $y-int * 100vw;
+      $x: $value-small - $y-int * $breakpoint-small;
+      --space-#{$name}: clamp(
+        #{$value-small},
+        calc(#{$x} + #{$y}),
+        #{$value-large}
+      );
+    }
+  } @else {
+    @each $name, $value in $spacing {
+      --space-#{$name}: #{$value};
+    }
+  }
+
+  /* border-radius */
+  @each $name, $value in $border-radius {
+    --rounded-#{$name}: #{$value};
+  }
+
+  /* font-family */
+  @each $name, $value in $font-family {
+    --font-#{$name}: #{$value};
+  }
+
+  /* font-size */
+  $responsive-font-size: map.get($font-size, '@all');
+  $fluid-font-size: map.get($font-size, 'fluid');
+  @if $responsive-font-size {
+    @each $name, $value in $responsive-font-size {
+      --text-#{$name}: #{$value};
+    }
+  } @else if $fluid-font-size {
+    $list-breakpoints: ();
+    $list-values: ();
+    @each $breakpoint, $value in $fluid-font-size {
+      $breakpoint-value: map.get(
+        $breakpoints,
+        string.slice($breakpoint, 2, -1)
+      );
+      $list-breakpoints: list.append($list-breakpoints, $breakpoint-value);
+      $list-values: list.append($list-values, $value);
+    }
+    $breakpoint-small: to-number(list.nth($list-breakpoints, 1));
+    $breakpoint-large: to-number(list.nth($list-breakpoints, 2));
+    @each $name, $value in list.nth($list-values, 1) {
+      $value-small: to-number($value);
+      $value-large: map.get(list.nth($list-values, 2), $name);
+      $value-large: to-number($value-large);
+      $y-int: math.div(
+        $value-large - $value-small,
+        $breakpoint-large - $breakpoint-small
+      );
+      $y: $y-int * 100vw;
+      $x: $value-small - $y-int * $breakpoint-small;
+      --text-#{$name}: clamp(
+        #{$value-small},
+        calc(#{$x} + #{$y}),
+        #{$value-large}
+      );
+    }
+  } @else {
+    @each $name, $value in $font-size {
+      --text-#{$name}: #{$value};
+    }
+  }
+
+  /* line-height */
+  @each $name, $value in $line-height {
+    --line-height-#{$name}: #{$value};
+  }
+}
+
+// colors
+@each $theme, $color-array in $colors {
+  $theme-selector: '[data-theme=#{$theme}]';
+  @if $theme == 'default' {
+    $theme-selector: ':root, [data-theme="default"]';
+  }
+
+  #{$theme-selector} {
+    // loop through colors and define color as hsl
+    @each $color, $hsl in $color-array {
+      $list: get-hsl-values($hsl);
+      --color-#{$color}-h: #{list.nth($list, 1)};
+      --color-#{$color}-s: #{list.nth($list, 2)};
+      --color-#{$color}-l: #{list.nth($list, 3)};
+      --color-#{$color}: hsl(
+        var(--color-#{$color}-h),
+        var(--color-#{$color}-s),
+        var(--color-#{$color}-l)
+      );
+    }
+  }
+}

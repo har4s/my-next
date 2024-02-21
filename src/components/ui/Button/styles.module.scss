@@ -1,0 +1,11 @@
+.root {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--rounded-full);
+  cursor: pointer;
+}
+
+/** Variants */
+.default {
+  color: var(--color-white);
+  background-color: var(--color-black);
+}

@@ -1,0 +1,18 @@
+@use 'base' as *;
+@use 'global' as *;
+@import 'modern-normalize/modern-normalize.css';
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: calc(var(--text-base) + 0.35555rem);
+  color: var(--color-black);
+  background-color: var(--color-white);
+  @include fontSmooth();
+}

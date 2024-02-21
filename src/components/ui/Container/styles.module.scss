@@ -1,0 +1,14 @@
+@use 'base' as *;
+
+.root {
+  max-width: var(--screen-xl);
+  padding-right: var(--space-md);
+  padding-left: var(--space-md);
+  margin-right: auto;
+  margin-left: auto;
+
+  @include min-width(md) {
+    padding-right: var(--space-xl);
+    padding-left: var(--space-xl);
+  }
+}

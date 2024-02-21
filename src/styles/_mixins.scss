@@ -1,0 +1,14 @@
+@use 'variables' as *;
+
+// breakpoints
+@mixin min-width($breakpoint) {
+  @media (min-width: map-get($map: $breakpoints, $key: $breakpoint)) {
+    @content;
+  }
+}
+
+@mixin max-width($breakpoint) {
+  @media not all and (min-width: map-get($map: $breakpoints, $key: $breakpoint)) {
+    @content;
+  }
+}
