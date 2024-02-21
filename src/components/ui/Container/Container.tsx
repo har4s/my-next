@@ -17,7 +17,7 @@ export const Container: React.FC<Props> = React.forwardRef<Ref, Props>(
         style,
         ref,
       },
-      children
+      children,
     )
-  }
+  },
 )

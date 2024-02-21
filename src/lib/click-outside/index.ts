@@ -1,1 +1,1 @@
-export { ClickOutside } from "./click-outside";
+export { ClickOutside } from './click-outside'

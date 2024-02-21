@@ -53,28 +53,27 @@ export type ButtonProps =
 
 type Ref = React.ReactNode | HTMLElement | string
 
-export const Button = React.forwardRef<Ref, ButtonProps>(function Button(
-  props,
-  ref
-) {
-  const {
-    variant,
-    size,
-    className,
-    disabled,
-    children,
-    as = 'button',
-    ...rest
-  } = props
-
-  return React.createElement(
-    as,
-    {
-      className: buttonVariants({ variant, size, className }),
-      ref,
+export const Button = React.forwardRef<Ref, ButtonProps>(
+  function Button(props, ref) {
+    const {
+      variant,
+      size,
+      className,
       disabled,
-      ...rest,
-    },
-    children
-  )
-})
+      children,
+      as = 'button',
+      ...rest
+    } = props
+
+    return React.createElement(
+      as,
+      {
+        className: buttonVariants({ variant, size, className }),
+        ref,
+        disabled,
+        ...rest,
+      },
+      children,
+    )
+  },
+)
